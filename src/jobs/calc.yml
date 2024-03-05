@@ -10,11 +10,11 @@ parameters:
       - "MUL"
       - "DIV"
   numA:
-    description: The first number
     type: integer
+    description: "The first number"
   numB:
-    description: The second number
     type: integer
+    description: "The second number"
 
 
 docker:
@@ -24,8 +24,8 @@ steps:
   - checkout
   - when:
     condition:
-      equals: [<< parameters.func >>, "ADD"]
-      steps:
-        - add:
-            numA: << parameters.numA >>
-            numB: << parameters.numB >>
+      equals: [ "ADD", << parameters.func >> ]
+    steps:
+      - add:
+          numA: << parameters.numA >>
+          numB: << parameters.numB >>
