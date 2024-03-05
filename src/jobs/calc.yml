@@ -9,12 +9,12 @@ parameters:
       - "SUB"
       - "MUL"
       - "DIV"
-    numA:
-      description: The first number
-      type: integer
-    numB:
-      description: The second number
-      type: integer
+  numA:
+    description: The first number
+    type: integer
+  numB:
+    description: The second number
+    type: integer
 
 
 docker:
