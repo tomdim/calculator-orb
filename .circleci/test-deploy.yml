@@ -41,6 +41,15 @@ workflows:
       # Test your orb's commands in a custom job and test your orb's jobs directly as a part of this workflow.
       - command-test:
           filters: *filters
+      - calculator-orb/calc:
+          func: "ADD"
+          numA: 2
+          numB: 5
+          filters: *filters
+          post-steps:
+            - run:
+                name: Should Equal 7
+                command: grep -xq 7 /tmp/ADD_RESULT.txt
       # The orb must be re-packed for publishing, and saved to the workspace.
       - orb-tools/pack:
           filters: *release-filters
@@ -52,5 +61,6 @@ workflows:
           requires:
             - orb-tools/pack
             - command-test
+            - calculator-orb/calc
           context: orb-publishing
           filters: *release-filters
