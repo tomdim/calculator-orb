@@ -1,7 +1,7 @@
 description: Perform a mathematical operation on two numbers and save the results.
 
 parameters:
-  func: 
+  func:
     description: The operation to perform on the given numbers
     type: enum
     enum:
@@ -12,7 +12,7 @@ parameters:
     numA:
       description: The first number
       type: integer
-    numB: 
+    numB:
       description: The second number
       type: integer
 
