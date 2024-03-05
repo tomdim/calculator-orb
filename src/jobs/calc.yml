@@ -25,7 +25,7 @@ steps:
   - when:
     condition:
       equals: [<< parameters.func >>, "ADD"]
-    steps:
-      - add:
-          numA: << parameters.numA >>
-          numB: << parameters.numB >>
+      steps:
+        - add:
+            numA: << parameters.numA >>
+            numB: << parameters.numB >>
