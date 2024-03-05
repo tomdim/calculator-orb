@@ -1,4 +1,4 @@
-description: Perform a mathematical operation on two numbers and save the results.
+version: 2.1
 
 parameters:
   func:
@@ -16,16 +16,29 @@ parameters:
     type: integer
     description: "The second number"
 
-
-docker:
-  - image: cimg/base:current
-
-steps:
-  - checkout
-  - when:
-    condition:
-      equals: [ "ADD", << parameters.func >> ]
+jobs:
+  math_operation:
+    docker:
+      - image: cimg/base:current
     steps:
-      - add:
-          numA: << parameters.numA >>
-          numB: << parameters.numB >>
+      - checkout
+      - run:
+          name: Perform Math Operation
+          command: |
+            if [[ "$CIRCLECI" ]]; then
+              if [[ "${func}" == "ADD" ]]; then
+                result=$(expr ${numA} + ${numB})
+              elif [[ "${func}" == "SUB" ]]; then
+                result=$(expr ${numA} - ${numB})
+              elif [[ "${func}" == "MUL" ]]; then
+                result=$(expr ${numA} \* ${numB})
+              elif [[ "${func}" == "DIV" ]]; then
+                result=$(expr ${numA} / ${numB})
+              else
+                echo "Invalid operation specified."
+                exit 1
+              fi
+              echo "Result: ${result}"
+              touch /tmp/ADD_RESULT.txt
+              echo "$result" > /tmp/ADD_RESULT.txt
+            fi
