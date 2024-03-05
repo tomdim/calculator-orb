@@ -31,6 +31,9 @@ jobs:
       - calculator-orb/add:
           numA: 2
           numB: 5
+      - run:
+          name: Should Equal 7
+          command: grep -xq 7 /tmp/ADD_RESULT.txt
 workflows:
   test-deploy:
     jobs:
